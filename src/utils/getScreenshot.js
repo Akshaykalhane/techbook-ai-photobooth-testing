@@ -22,28 +22,42 @@ const getScreenshot = ({ element, type, isHorizontalScreen }, callback) => {
     }
   }
 
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const targetScale = 3; // Render at a higher scale for quality without increasing size
+
+  // Common html2canvas options
+  const commonOptions = {
+    useCORS: true,
+    backgroundColor: null,
+    scale: targetScale * devicePixelRatio, // Render with high scale
+  };
+
   // Capture the screenshot using html2canvas
-  if (type == "withFrame") {
-    html2canvas(element, {
-      useCORS: true,
-      scale: 3,
-      x: isHorizontalScreen ? 656 : 0,
-      y: 0,
-      width: isHorizontalScreen ? 610 : element.offsetWidth,
-      height: element.offsetHeight - element.offsetHeight / 8,
-    }).then((canvas) => {
-      const base64Image = canvas.toDataURL("");
-      callback(base64Image);
-    });
-  } else {
-    html2canvas(element, {
-      useCORS: true,
-      scale: 5,
-    }).then((canvas) => {
-      const base64Image = canvas.toDataURL("");
-      callback(base64Image);
-    });
-  }
+  html2canvas(element, commonOptions).then((canvas) => {
+    // Resize the canvas back to the original size (but keep the quality)
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = element.offsetWidth;
+    finalCanvas.height = element.offsetHeight;
+
+    const ctx = finalCanvas.getContext("2d");
+
+    // Draw the high-resolution canvas onto the smaller canvas
+    ctx.drawImage(
+      canvas,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+      0,
+      0,
+      finalCanvas.width,
+      finalCanvas.height
+    );
+
+    // Convert the resized canvas to a base64 image
+    const base64Image = finalCanvas.toDataURL("");
+    callback(base64Image);
+  });
 };
 
 export default getScreenshot;
