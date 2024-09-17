@@ -1,0 +1,168 @@
+$color-one: #212121;
+
+.my-camera-custom-class {
+  transform: scaleX(-1) !important;
+}
+
+.CameraPage {
+  height: 100svh;
+  position: relative;
+  .cameraPageBgContainer {
+    width: 100%;
+    height: 100%;
+  }
+  .mainContainer {
+    height: 75%;
+    position: absolute;
+    inset: 0;
+    top: 20%;
+    justify-content: space-between;
+
+    .wrapper {
+      // border: 1px solid black;
+      gap: 6.2vh;
+      .logoContainer {
+        width: 35vh;
+      }
+
+      .cameraContainerWrapper {
+        // gap: 2vh;
+        position: relative;
+        .editorContainer {
+          position: absolute;
+          top: -10.5%;
+          right: 0;
+          border: 0.1vw solid #212121;
+          background-color: #212121;
+          gap: 0.5vw;
+          svg {
+            font-size: 4vh;
+            border: 0.1vw solid #f1f1f1;
+            color: #fff;
+          }
+          .closeEditorBtn {
+            svg {
+              color: greenyellow;
+            }
+          }
+        }
+        .cameraContainer {
+          position: relative;
+          width: 30vh;
+          height: 40vh;
+          /*  outline: 2.5vw solid $color-one;
+          outline-offset: -2.5vw; */
+          // border: 2.5vw solid $color-one;
+          // border: 11px solid red;
+          border-radius: 2vw;
+          overflow: hidden;
+          .webcamWithModel {
+            width: 100%;
+
+            height: 100%;
+            overflow: hidden;
+            #webcam {
+              width: auto;
+              height: 100%;
+              object-fit: cover;
+            }
+            .modelContainer {
+              // border: 5px solid red;
+              position: absolute;
+              height: auto;
+              // background-color: red;
+              transform: translate(-147.5px, 62.5px);
+            }
+            .countdown {
+              position: absolute;
+              top: 37%;
+              left: 45%;
+              color: $color-one;
+              font-size: 8.5vw;
+              font-weight: 600;
+              z-index: 2;
+            }
+          }
+          .frameContainer,
+          .capturedImgContainer {
+            position: absolute;
+            inset: 0;
+            width: 100.2%;
+            height: 100%;
+          }
+          .frameContainer {
+            pointer-events: none;
+          }
+          .capturedImgContainer {
+            background-color: $color-one;
+            /*          outline: 2.5vw solid $color-one;
+            outline-offset: -2.5vw; */
+            transform: scaleX(-1);
+          }
+        }
+      }
+    }
+
+    .captureBtnContainer,
+    .retakeBtnContainer,
+    .submitBtnContainer {
+      width: 22vh;
+      cursor: pointer;
+    }
+
+    .retakeSubmitBtnContainer {
+      gap: 2vh;
+    }
+  }
+}
+
+.loader2 {
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 4vh 0 #fff, -4vh 0 #fff;
+  position: relative;
+  animation: flash 0.2s ease-out infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #fff2;
+    box-shadow: 4vh 0 #fff2, -4vh 0 #fff;
+  }
+  50% {
+    background-color: #fff;
+    box-shadow: 4vh 0 #fff2, -4vh 0 #fff2;
+  }
+  100% {
+    background-color: #fff2;
+    box-shadow: 4vh 0 #fff, -4vh 0 #fff2;
+  }
+}
+
+@media all and (min-width: 1100px) {
+  .mainContainer {
+    // border: 1px solid black;
+    height: 80% !important;
+    top: 17% !important;
+    .wrapper {
+      gap: 5vh !important;
+    }
+    .editorContainer {
+      top: -8.5% !important;
+      svg {
+        font-size: 3vh !important;
+      }
+    }
+
+    .cameraContainer {
+      width: 35vh !important;
+      height: 45vh !important;
+      border-radius: 1vw !important;
+    }
+    .countdown {
+      font-size: 3vw !important;
+    }
+  }
+}
