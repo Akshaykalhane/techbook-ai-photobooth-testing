@@ -26,13 +26,13 @@ const getScreenshot = ({ element, type, isHorizontalScreen }, callback) => {
   if (type == "withFrame") {
     html2canvas(element, {
       useCORS: true,
-      scale: 1,
+      scale: 3,
       x: isHorizontalScreen ? 656 : 0,
       y: 0,
       width: isHorizontalScreen ? 610 : element.offsetWidth,
       height: element.offsetHeight - element.offsetHeight / 8,
     }).then((canvas) => {
-      const base64Image = canvas.toDataURL("image/png");
+      const base64Image = canvas.toDataURL("");
       callback(base64Image);
     });
   } else {
@@ -40,7 +40,7 @@ const getScreenshot = ({ element, type, isHorizontalScreen }, callback) => {
       useCORS: true,
       scale: 5,
     }).then((canvas) => {
-      const base64Image = canvas.toDataURL("image/png");
+      const base64Image = canvas.toDataURL("");
       callback(base64Image);
     });
   }
